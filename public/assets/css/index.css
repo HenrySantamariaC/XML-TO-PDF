@@ -1,0 +1,44 @@
+:root {
+    --main-bg-color: #1e3854;
+    --main-bg-color-transparent: #1e385460;
+  }
+
+body {
+    background-color: var(--main-bg-color);
+}
+.rounded {
+    border-radius: 1rem !important;
+}
+.h-90 {
+    height: 90vh !important;
+}
+.banner {
+    margin: 5vh auto;
+}
+.shadow {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.4) !important;
+}
+.image {
+    background-image: url('../img/FotoPortada.jpg');
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+.image::after {
+    content: "";
+    background-color: var(--main-bg-color-transparent);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.text-blue {
+    color: #1e3854;
+}
+.btn-primary {
+    background-color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
+}
+.btn-primary:hover {
+    background-color: var(--main-bg-color);
+    border-color: var(--main-bg-color);
+}

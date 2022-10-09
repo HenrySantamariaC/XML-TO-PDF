@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <title>XML A PDF</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-11 mx-auto vh-100">
+                <div class="row banner shadow rounded h-90 overflow-hidden">
+                    <div class="col-lg-6 p-5 bg-white">
+                        <h1 class="text-blue">XML A PDF</h1>
+                        <form action="/upload" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Seleccione el documento a imprimir</label>
+                                <input class="form-control" type="file" id="formFile" name="xml" accept=".xml, .XML" required>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3">Convertir</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6 image p-0 d-none d-lg-block">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/bootstrap.bundle.minjs" type="application/js"></script>
+</body>
+</html>
