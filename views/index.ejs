@@ -16,11 +16,17 @@
                     <div class="col-lg-6 p-5 bg-white">
                         <h1 class="text-blue">XML A PDF</h1>
                         <form action="/upload" method="post" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Seleccione el documento a imprimir</label>
-                                <input class="form-control" type="file" id="formFile" name="xml" accept=".xml, .XML" required>
+                            <div class="drag-area text-center my-3 p-5">
+                                <h5 class="" id="nameFile">Arrastra y suelta archivos</h5>
+                                <h6>o</h6>
+                                <label for="formFile" class="btn btn-secondary">Selecciona tus archivos</label>
+                                <input class="form-control mx-auto" type="file" id="formFile" name="xml" accept=".xml, .XML, .zip, .ZIP" required >
                             </div>
-                            <div class="col-auto">
+                            <div class="alert alert-light hiddenAlertBox" id="boxAlert" role="alert">
+                                <span><img src="./assets/img/xml.png" id="imgAlert" alt=""></span>
+                                <span id="textAlert">A simple light alert—check it out!</span>
+                              </div>
+                            <div class="col-auto  d-grid gap-2 my-3">
                                 <button type="submit" class="btn btn-primary mb-3">Convertir</button>
                             </div>
                         </form>
@@ -31,6 +37,7 @@
             </div>
         </div>
     </div>
-    <script src="./assets/js/bootstrap.bundle.minjs" type="application/js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js" type="application/js"></script>
+    <script src="./assets/js/dragAndDrop.js"></script>
 </body>
 </html>

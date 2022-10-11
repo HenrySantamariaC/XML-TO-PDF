@@ -1,7 +1,8 @@
 import express from "express"
 import * as url from 'url'
 import multer from "multer"
-import XmlParser from './app.js'
+import XmlParser from './scripts/XmlParser.js'
+import AddFun from './scripts/AdditionalFunctions.js'
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
@@ -18,8 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/deletefiles", (req, res) => {
-  XmlParser.deletefiles("./uploads")
-  XmlParser.deletefiles("./public/pdf")
+  XmlParser.deletefiles()
   res.redirect('/')
 })
 
@@ -35,10 +35,14 @@ let storage = multer.diskStorage({
 let upload = multer({storage})
 
 app.post('/upload', upload.single('xml'), (req, res, next) => {
-  XmlParser.xmlToPfd(req.file.filename).then((data)=>{
-    const fileName = '/pdf/'+ XmlParser.fileTypeXmlToPdf(req.file.filename)
-    res.render("archive", {pdfPath: fileName})
-  })
+  try {
+    XmlParser.xmlToPfd(req.file.filename).then((data)=>{
+      const fileName = '/pdf/'+ AddFun.changeExtensionFileName(req.file.filename,'pdf')
+      res.render("archive", {pdfPath: fileName})
+    })
+  } catch (error) {
+    console.log(error);
+  }
 })
 
 app.listen(port, () => {

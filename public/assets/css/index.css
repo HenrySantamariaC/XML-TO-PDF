@@ -1,6 +1,12 @@
 :root {
     --main-bg-color: #1e3854;
     --main-bg-color-transparent: #1e385460;
+    --zip-bg-color: #7517c3;
+    --zip-bg-color-transparent: #7517c360;
+    --xml-bg-color: #f67c01;
+    --xml-bg-color-transparent: #f67c0160;
+    --error-bg-color: #b31412;
+    --error-bg-color-transparent: #b3141260;
   }
 
 body {
@@ -42,3 +48,39 @@ body {
     background-color: var(--main-bg-color);
     border-color: var(--main-bg-color);
 }
+.drag-area{
+    border: 5px dashed #ddd;
+    border-radius: 1rem;
+}
+.drag-area.active{
+    background-color: #b8d4fe;
+    color: black;
+    border: 5px dashed #618ac9;
+}
+#formFile {
+    height: 0;
+    width: 0;
+    opacity: 0;
+}
+.zipBox {
+    background-color: var(--zip-bg-color-transparent);
+    border: 1px solid var(--zip-bg-color);
+    color: black;
+}
+.xmlBox {
+    background-color: var(--xml-bg-color-transparent);
+    border: 1px solid var(--xml-bg-color);
+    color: black;
+}
+.errorFile {
+    background-color: var(--error-bg-color-transparent);
+    border: 1px solid var(--error-bg-color);
+    color: black;
+}
+.hiddenAlertBox {
+    opacity: 0;
+}
+
+/* #7517c3 * for zip files/
+/* #f67c01 * for xml files/
+/* #b31412 * for error files/
