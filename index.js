@@ -41,7 +41,7 @@ app.post('/upload', upload.single('xml'), (req, res, next) => {
       res.render("archive", {pdfPath: fileName})
     })
   } catch (error) {
-    console.log(error);
+    throw new SyntaxError(error)
   }
 })
 

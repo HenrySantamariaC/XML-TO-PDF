@@ -16,9 +16,29 @@ AddFun.deleteFolder = (path) => {
         files = fs.readdirSync(path)
         files.forEach(function(file,index){
             let curPath = path + "/" + file
-            fs.unlinkSync(curPath)
+            if(fs.statSync(curPath).isDirectory()) {
+                deleteAllFolder(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
         });
     }
+}
+function deleteAllFolder(path) {
+    let files = [];
+    if( fs.existsSync(path) ) {
+        files = fs.readdirSync(path);
+        files.forEach(function(file,index){
+            let curPath = path + "/" + file;
+            if(fs.statSync(curPath).isDirectory()) {
+                deleteAllFolder(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+
 }
 AddFun.isZipFile = (filename) => {
     if (AddFun.getExtensionFileName(filename) === 'zip' || AddFun.getExtensionFileName(filename) === 'ZIP') {

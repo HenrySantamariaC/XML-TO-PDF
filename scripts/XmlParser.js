@@ -118,16 +118,20 @@ function createHtmlWithJson(json) {
 XmlParser.xmlToPfd = (filename) => {
     return new Promise((resolve, reject)=>{
         (async(name) => {
-            if (AddFun.isZipFile(name)) {
-                let path = './uploads/' + name
-                let res = await decompress(path, './uploads')
+            try {
+                if (AddFun.isZipFile(name)) {
+                    let path = './uploads/' + name
+                    let res = await decompress(path, './uploads')
+                }
+                let data = fs.readFileSync('./uploads/'+AddFun.changeExtensionFileName(filename, 'xml'),{encoding:'utf8', flag:'r'})
+                let json = parseXmlToJson(data)
+                content = style + createHtmlWithJson(json)
+                htmlPdf.create(content, options).toFile('./public/pdf/'+ AddFun.changeExtensionFileName(filename, 'pdf'), function(err, res) {
+                    if (err){ console.log(err) } else { resolve(res) }
+                });
+            } catch (error) {
+                console.log(error);
             }
-            let data = fs.readFileSync('./uploads/'+AddFun.changeExtensionFileName(filename, 'xml'),{encoding:'utf8', flag:'r'})
-            let json = parseXmlToJson(data)
-            content = style + createHtmlWithJson(json)
-            htmlPdf.create(content, options).toFile('./public/pdf/'+ AddFun.changeExtensionFileName(filename, 'pdf'), function(err, res) {
-                if (err){ console.log(err) } else { resolve(res) }
-            });
         })(filename)
     })
 }
