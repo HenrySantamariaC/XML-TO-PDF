@@ -37,7 +37,7 @@ let upload = multer({storage})
 app.post('/upload', upload.single('xml'), (req, res, next) => {
   try {
     XmlParser.xmlToPfd(req.file.filename).then((data)=>{
-      const fileName = '/pdf/'+ AddFun.changeExtensionFileName(req.file.filename,'pdf')
+      const fileName = '/pdf/'+ AddFun.changeExtensionFileName(AddFun.verifyDuplicatedFilename(req.file.filename),'pdf')
       res.render("archive", {pdfPath: fileName})
     })
   } catch (error) {

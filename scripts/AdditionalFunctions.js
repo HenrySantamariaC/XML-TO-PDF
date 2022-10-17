@@ -10,6 +10,9 @@ AddFun.changeExtensionFileName = (filename, extensionFile) => {
     let strFilename = array.join('.')
     return strFilename
 }
+AddFun.verifyDuplicatedFilename = (filename) => {
+    return filename.replace(/(\ *\([0-9]*\))/gi,'')
+}
 AddFun.deleteFolder = (path) => {
     let files = []
     if( fs.existsSync(path) ) {

@@ -117,16 +117,18 @@ function createHtmlWithJson(json) {
 
 XmlParser.xmlToPfd = (filename) => {
     return new Promise((resolve, reject)=>{
-        (async(name) => {
+        (async(strFilename) => {
             try {
-                if (AddFun.isZipFile(name)) {
-                    let path = './uploads/' + name
+                let nameFile = AddFun.verifyDuplicatedFilename(strFilename)
+                fs.renameSync('./uploads/' + strFilename, './uploads/' + nameFile)
+                if (AddFun.isZipFile(nameFile)) {
+                    let path = './uploads/' + nameFile
                     let res = await decompress(path, './uploads')
                 }
-                let data = fs.readFileSync('./uploads/'+AddFun.changeExtensionFileName(filename, 'xml'),{encoding:'utf8', flag:'r'})
+                let data = fs.readFileSync('./uploads/'+AddFun.changeExtensionFileName(nameFile, 'xml'),{encoding:'utf8', flag:'r'})
                 let json = parseXmlToJson(data)
                 content = style + createHtmlWithJson(json)
-                htmlPdf.create(content, options).toFile('./public/pdf/'+ AddFun.changeExtensionFileName(filename, 'pdf'), function(err, res) {
+                htmlPdf.create(content, options).toFile('./public/pdf/'+ AddFun.changeExtensionFileName(nameFile, 'pdf'), function(err, res) {
                     if (err){ console.log(err) } else { resolve(res) }
                 });
             } catch (error) {
