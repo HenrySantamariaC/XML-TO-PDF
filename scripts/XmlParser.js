@@ -58,6 +58,16 @@ function parseXmlToJson(data) {
     })
     return json
 }
+
+function getAddressClient(data) {
+    let str = 'CHICLAYO'
+    if (data.hasOwnProperty('RegistrationAddress')) {
+        str = data.RegistrationAddress.AddressLine.Line
+        return str
+    }
+    return str
+}
+
 function createHtmlWithJson(json) {
     let content = ''
     try {
@@ -73,6 +83,7 @@ function createHtmlWithJson(json) {
         <p class="fw-bold fs-14 text-center">${json.Invoice.ID}</p>
         <span class="fw-bold">CLIENTE: </span><span>${json.Invoice.AccountingCustomerParty.Party.PartyLegalEntity.RegistrationName}</span><br/>
         <span class="fw-bold">DOC. IDENTIDAD: </span><span>${json.Invoice.AccountingCustomerParty.Party.PartyIdentification.ID}</span><br/>
+        <span class="fw-bold">DIRECCION: </span><span>${getAddressClient(json.Invoice.AccountingCustomerParty.Party.PartyLegalEntity)}</span><br/>
         <span class="fw-bold">EMISION: </span><span>${json.Invoice.IssueDate}</span>
         <hr/>
         <table class="table fs-11">
